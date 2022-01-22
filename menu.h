@@ -4,16 +4,19 @@
 #include "movie.h"
 
 /*
- * The menu file contains functions to run a menu for movie data.
+ * The menu file provides the user with menu options to process movie data by
+ * year.
  *
- * The user can get movie data filtered by year and language.
+ * The user can process data for the largest file in the directory.
  * 
- * The user can get a list of highest rated movies per year.
+ * The user can process data for the smallest file in the directory.
  * 
- * Function comments are included in menu.c.
+ * The user can process data a specified file in the directory.
  */
 
-void runMenu(struct Movie *head);
+void runMenu();
+
+void runSubmenu();
 
 void getMoviesByYear(struct Movie *head);
 

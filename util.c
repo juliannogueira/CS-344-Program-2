@@ -91,3 +91,80 @@ int stringLength(char *string) {
     }
     return i;
 }
+
+/*
+ * Copy the contents of a source string into a destination string.
+ */
+void copyString(char *source, char *destination) {
+    int length = stringLength(source);
+    for (int i = 0; i < length; i++) {
+        *(destination + i) = *(source + i);
+    }
+    *(destination + length) = '\0';
+}
+
+/*
+ * Parse a string for a pattern.
+ *
+ * If the pattern is found, return 1. Otherwise, return 0.
+ */
+int parseString(char *pattern, char *string) {
+    for (int i = 0; i < stringLength(string); i++) {
+        if (*(pattern + 0) == *(string + i)) {
+            for (int j = 0; j < stringLength(pattern); j++) {
+                if ((i + stringLength(pattern)) > stringLength(string)) {
+                    break;
+                } else if (*(pattern + j) != *(string + i + j)) {
+                    break;
+                } else if (j == (stringLength(pattern) - 1)) {
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+/*
+ * Parse a file for an extension.
+ *
+ * If the extension is found, return 1. Otherwise, return 0.
+ */
+int parseExtension(char *extension, char *filename) {
+    for (int i = 0; i < stringLength(filename); i++) {
+        if (*(extension + 0) == *(filename + i)) {
+            for (int j = 0; j < stringLength(extension); j++) {
+                if ((i + stringLength(extension)) > stringLength(filename)) {
+                    break;
+                } else if (*(extension + j) != *(filename + i + j)) {
+                    break;
+                } else if (j == (stringLength(extension) - 1) &&\
+                          i + j == (stringLength(filename) - 1)) {
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+/*
+ * Get a file in the current directory with the passed prefix and extension.
+ * 
+ * The type specifies the file size, where a 1 returns the smallest file, and a
+ * 2 returns the largest file.
+ */
+void getParsedFile(char *filename, char *prefix, char *extension, int type) {
+    DIR* dir = opendir(".");
+    struct dirent *entry;
+
+    while ((entry = readdir(dir)) != NULL) {
+        if (parseString(prefix, entry->d_name) &&\
+           parseExtension(extension, entry->d_name)) {
+            printf("%s\n", entry->d_name);
+            copyString(entry->d_name, filename);
+        }
+    }
+
+    closedir(dir);
+}

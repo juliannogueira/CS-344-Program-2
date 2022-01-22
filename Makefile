@@ -1,6 +1,6 @@
 CC = gcc -std=c99
 CFLAGS = -g -Wall
-TARGET = movies
+TARGET = movies_by_year
 
 output: main.o util.o movie.o menu.o
 	$(CC) $(CFLAGS) main.o util.o movie.o menu.o -o $(TARGET)
@@ -21,7 +21,7 @@ clean:
 	rm -f *.o $(TARGET)
 
 run:
-	./$(TARGET) $(file)
+	./$(TARGET)
 
 check:
-	valgrind --leak-check=yes ./$(TARGET) $(file)
+	valgrind --leak-check=yes ./$(TARGET)

@@ -342,9 +342,9 @@ void readListMoviesByLanguage(struct Movie *head, char *language) {
                         break;
                     }
                     if (j == (stringLength(language) - 1) &&\
-                        (*(curr->languages + i + j + 1) == ';' ||\
-                        *(curr->languages + i + j + 1) == ']')) {
-                        match = 1;
+                       (*(curr->languages + i + j + 1) == ';' ||\
+                       *(curr->languages + i + j + 1) == ']')) {
+                       match = 1;
                     }
                 }
             }

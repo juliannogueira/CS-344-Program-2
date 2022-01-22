@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "processMovieFile.h"
 
 /*
  * Display the main menu to the user.
@@ -86,6 +87,7 @@ void runSubmenu() {
         switch (option) {
             case '1':
                 printf("\nCase 1.\n");
+                processMovieFile(1);
                 break;
             case '2':
                 printf("\nCase 2.\n");

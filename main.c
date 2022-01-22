@@ -20,23 +20,7 @@
  * Free memory after using the linked list.
  */
 int main(int argc, char *argv[]) {
-    struct Movie *head;
-
-    if (!hasCommandLineArgument(argv)) {
-        printf("A file was not passed.\n");
-        return 1;
-    }
-
-    if (!isValidFile(*(argv + 1))) {
-        printf("An invalid filename was passed.\n");
-        return 1;
-    }
-
-    head = createListFromFile(*(argv + 1));
-
-    runMenu(head);
-
-    freeList(head);
+    runMenu();
 
     return 0;
 }

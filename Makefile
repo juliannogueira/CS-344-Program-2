@@ -22,6 +22,7 @@ menu.o: menu.c menu.h
 
 clean:
 	rm -f *.o $(TARGET)
+	rm -rf torresju.movies.*
 
 run:
 	./$(TARGET)

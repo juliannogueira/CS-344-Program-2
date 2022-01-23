@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <time.h>
 #include <unistd.h>
 
 /*
@@ -19,6 +20,12 @@
  * 
  * Function comments are included util.c.
  */
+
+void intToString(int num, char *destination);
+
+void concatStrings(char *str1, char *str2, char *destination);
+
+int getRandomNumber(int max); 
 
 int hasCommandLineArgument(char *argv[]);
 
@@ -41,5 +48,17 @@ int parseString(char *pattern, char *string);
 int parseExtension(char *extension, char *filename);
 
 void getParsedFilename(char *filename, char *prefix, char *extension, int getLargestFile);
+
+void getFilename(char *buffer, int size);
+
+void createDirectoryName(char *dirname, char *name, int max, int maxLength);
+
+void createDirectory(char *dirname, char *name, int max, int maxLength);
+
+void createFile(char *path);
+
+void appendToFile(char *path, char *text);
+
+void createPath(char *dirname, char *filename, char *path);
 
 #endif

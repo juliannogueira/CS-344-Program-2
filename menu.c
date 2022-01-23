@@ -59,6 +59,7 @@ void runMenu() {
  */
 void runSubmenu() {
     int isRunning = 1;
+    int getLargestFile = 0;
     const int SIZE = 255;
     char buffer[SIZE];
     char option = '\0';
@@ -86,11 +87,12 @@ void runSubmenu() {
 
         switch (option) {
             case '1':
-                printf("\nCase 1.\n");
-                processMovieFile(1);
+                getLargestFile = 1;
+                processMovieFile(getLargestFile);
                 break;
             case '2':
-                printf("\nCase 2.\n");
+                getLargestFile = 0;
+                processMovieFile(getLargestFile);
                 break;
             case '3':
                 printf("\nCase 3.\n");

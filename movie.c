@@ -43,10 +43,8 @@ struct Movie *createListFromFile(char *filename) {
     for (char ch = fgetc(fp); ch != EOF; ch = fgetc(fp)) {
         buffer[index] = ch;
         index++;
-
         if ((ch == ',' || ch == '\n') && line > 0) {
             buffer[index - 1] = '\0';
-
             if (column == 0) {
                 recordCount++;
                 movie = malloc(sizeof(struct Movie));
@@ -54,33 +52,29 @@ struct Movie *createListFromFile(char *filename) {
                 if (head == NULL) {
                     head = movie;
                     curr = movie;
+                    curr->next = NULL;
                 } else {
                     curr->next = movie;
                     curr = movie;
+                    curr->next = NULL;
                 }
             }
-
             addData(movie, buffer, index, column);
-
             column++;
             index = 0;
         }
-
         if (ch == '\n') {
             line++;
             index = 0;
             column = 0;
         }
     }
-
     if (column != 0) {
         addData(movie, buffer, index, column);
     }
 
-    printf("Processed file %s and parsed data for %d movies", filename, recordCount);
-
+    printf("\nFile %s was processed, and data was parsed for %d movies.\n", filename, recordCount);
     fclose(fp);
-
     return head;
 }
 

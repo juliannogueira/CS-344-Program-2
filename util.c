@@ -139,7 +139,7 @@ int parseExtension(char *extension, char *filename) {
                 } else if (*(extension + j) != *(filename + i + j)) {
                     break;
                 } else if (j == (stringLength(extension) - 1) &&\
-                          i + j == (stringLength(filename) - 1)) {
+                           i + j == (stringLength(filename) - 1)) {
                     return 1;
                 }
             }
@@ -151,18 +151,33 @@ int parseExtension(char *extension, char *filename) {
 /*
  * Get a file in the current directory with the passed prefix and extension.
  * 
- * The type specifies the file size, where a 1 returns the smallest file, and a
- * 2 returns the largest file.
+ * The type specifies the file size, where a 0 returns the smallest file, and a
+ * 1 returns the largest file.
  */
-void getParsedFile(char *filename, char *prefix, char *extension, int type) {
+void getParsedFilename(char *filename, char *prefix, char *extension, int getLargestFile) {
     DIR* dir = opendir(".");
     struct dirent *entry;
+    struct stat buffer;
+    int size = -1;
 
     while ((entry = readdir(dir)) != NULL) {
         if (parseString(prefix, entry->d_name) &&\
-           parseExtension(extension, entry->d_name)) {
-            printf("%s\n", entry->d_name);
-            copyString(entry->d_name, filename);
+            parseExtension(extension, entry->d_name)) {
+            stat(entry->d_name, &buffer);
+            if (getLargestFile) {
+                if (size < buffer.st_size) {
+                    size = buffer.st_size;
+                    copyString(entry->d_name, filename);
+                }
+            } else {
+                if (size == -1) {
+                    size = buffer.st_size;
+                    copyString(entry->d_name, filename);
+                } else if (size > buffer.st_size) {
+                    size = buffer.st_size;
+                    copyString(entry->d_name, filename);
+                }
+            }
         }
     }
 

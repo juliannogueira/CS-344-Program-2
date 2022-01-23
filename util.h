@@ -40,6 +40,6 @@ int parseString(char *pattern, char *string);
 
 int parseExtension(char *extension, char *filename);
 
-void getParsedFile(char *filename, char *prefix, char *extension, int type);
+void getParsedFilename(char *filename, char *prefix, char *extension, int getLargestFile);
 
 #endif
